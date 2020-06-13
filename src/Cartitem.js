@@ -11,13 +11,70 @@ class CartItem extends React.Component{
             img: ''
         }
         /* binding for accesing the 'this' keyword if we have multiple event handler this.increaseQuantity=this.increaseQuantity.bind(this); 
-        or we can use arrow function */      
+        or we can use arrow function */ 
+        // this.testing();     
     }
+
+    // testing(){
+    //     const promise= new Promise((resolve,reject)=>{
+    //         setTimeout(()=>{
+    //             resolve('done');
+    //         },3000)
+    //     });
+
+    //     promise.then(()=>{
+    //         // setState acts like a async call
+    //         this.setState({ Qty: this.state.Qty+10});
+    //         this.setState({ Qty: this.state.Qty+10});
+    //         this.setState({ Qty: this.state.Qty+10});
+    //         console.log('state',this.state);
+    //     })
+    // }
     // arrow function
     increaseQuantity = ()=> {
-        console.log('this', this.state);
+        // this.state.Qty++;
+        // console.log('this', this.state);
+        // we will use setState function which is iherited from React.Component
+        //*******setState form 1
+            // this.setState({
+            //     Qty: this.state.Qty+1
+            // });
+        //*******setState form 2
+        // // if prev state required use this
+                this.setState((prevState)=>{
+                    return{
+                        Qty: prevState.Qty+1
+                    }               
+                },
+                // ()=>{
+                //     console.log(this.state);
+                // }
+                );
+    }
+
+    decreaseQuantity = ()=> {
+        // here we are usinng destructuring
+          const {Qty}=this.state;
+          if(Qty===0){
+              return;
+          }
+        
+        // console.log('this', this.state);
+        // we will use setState function which is iherited from React.Component
+        //*******setState form 1
+            // this.setState({
+            //     Qty: this.state.Qty-1
+            // });
+        //*******setState form 2
+        // if prev state required use this
+                this.setState((prevState)=>{  
+                        return{
+                            Qty: prevState.Qty-1
+                        }                            
+                });
     }
     render(){
+        // console.log('render');
         const{price, title, Qty }= this.state;
         return(
         <div className="cart-item">
@@ -35,10 +92,11 @@ class CartItem extends React.Component{
                       className="action-icons" 
                       src="https://image.flaticon.com/icons/svg/992/992651.svg"
                       onClick={this.increaseQuantity} // whenever i click this icon increaseQuantity function will be called
-
                       />
 
-                     <img alt="decrease" className="action-icons" src="https://image.flaticon.com/icons/svg/659/659892.svg" />
+                     <img alt="decrease" className="action-icons" src="https://image.flaticon.com/icons/svg/659/659892.svg"
+                     onClick={this.decreaseQuantity} // whenever i click this icon decreaseQuantity function will be called
+                      />
                      <img alt="delete" className="action-icons" src="https://image.flaticon.com/icons/svg/1345/1345874.svg" />
                  </div>
             </div>
