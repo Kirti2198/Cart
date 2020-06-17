@@ -2,19 +2,11 @@ import React, { useContext, StrictMode } from 'react';
 
 
 class CartItem extends React.Component{
-    constructor (){
-        // constructor of parent class
-        super();
-        this.state = {
-            price: 999,
-            title: 'Phone',
-            Qty: 1,
-            img: ''
-        }
+   
         /* binding for accesing the 'this' keyword if we have multiple event handler this.increaseQuantity=this.increaseQuantity.bind(this); 
         or we can use arrow function */ 
         // this.testing();     
-    }
+    
 
     // testing(){
     //     const promise= new Promise((resolve,reject)=>{
@@ -75,8 +67,11 @@ class CartItem extends React.Component{
                 });
     }
     render(){
+        console.log('this.props',this.props);
         // console.log('render');
-        const{price, title, Qty }= this.state;
+        // const{price, title, Qty }= this.state;
+        // instead of state we can use props
+        const{price, title, Qty }= this.props.product;
         return(
         <div className="cart-item">
             <div className="left-block">
