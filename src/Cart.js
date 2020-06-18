@@ -7,7 +7,7 @@ class Cart extends React.Component{
         // constructor of parent class
         super();
         this.state = {
-            products:[
+        products: [
             {
                 price: 99,
                 title: 'Watch',
@@ -32,6 +32,46 @@ class Cart extends React.Component{
         ]
        }
     }
+    // for increase quantity function
+    handleIncreaseQuantity= (product) => {
+        console.log("hey please increase the quantity of", product);
+        
+        const { products }= this.state;
+        
+        const Index= products.indexOf(product);
+        products[Index].Qty +=1;
+        this.setState({
+            products: products
+        })
+    }
+
+    // for decrease quantity function
+    handleDecreaseQuantity= (product) => {
+        console.log("hey please decrease the quantity of", product);
+        
+        const { products }= this.state;
+        
+        const Index= products.indexOf(product);
+        if(products[Index].Qty == 0){
+            return;
+        }
+        products[Index].Qty -=1;
+        this.setState({
+            products: products
+        })
+    }
+    // for deleting the product
+    handleDeleteProduct= (id) => {
+        console.log("hey please delete the product of id", id);
+
+        const {products }= this.state;
+        // this method will return an array which not contain the item with given id
+        const items= products.filter((item) => item.id != id);
+        this.setState({
+            products: items
+        })
+    }
+
     // you can't write const arr here
     render(){
         // const arr=[1,2,3,4,5];
@@ -42,14 +82,19 @@ class Cart extends React.Component{
                 {products.map((product)=>{
                     // here key is not a prop it is for internal react purposes
                     return (
-                        <CartItem product={product} key={product.id}/> 
+                        <CartItem 
+                        // props
+                        product={product} 
+                        key={product.id}
+                        // we are passing the func as a prop
+                        onIncreaseQuantity= {this.handleIncreaseQuantity}
+                        onDecreaseQuantity= {this.handleDecreaseQuantity}
+                        onDeleteItem={this.handleDeleteProduct}
+                        /> 
                     )      
-                })            
-                }
+                })}
             </div>         
         );
     }
 }
-
-
 export default Cart;

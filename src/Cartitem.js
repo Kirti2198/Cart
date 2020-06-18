@@ -1,4 +1,4 @@
-import React, { useContext, StrictMode } from 'react';
+import React from 'react';
 
 
 class CartItem extends React.Component{
@@ -7,7 +7,7 @@ class CartItem extends React.Component{
         or we can use arrow function */ 
         // this.testing();     
     
-
+/*
     // testing(){
     //     const promise= new Promise((resolve,reject)=>{
     //         setTimeout(()=>{
@@ -65,15 +65,17 @@ class CartItem extends React.Component{
                             Qty: prevState.Qty-1
                         }                            
                 });
-    }
+    } */
     render(){
         console.log('this.props',this.props);
         // console.log('render');
         // const{price, title, Qty }= this.state;
         // instead of state we can use props
-        const{price, title, Qty }= this.props.product;
+        const{price, title, Qty, id }= this.props.product;
+        const{product, onIncreaseQuantity, onDecreaseQuantity, onDeleteItem }= this.props;
         return(
         <div className="cart-item">
+            {this.props.jsx}
             <div className="left-block">
                 <img style={styles.image}/>
             </div>
@@ -87,13 +89,16 @@ class CartItem extends React.Component{
                      <img alt="increase"
                       className="action-icons" 
                       src="https://image.flaticon.com/icons/svg/992/992651.svg"
-                      onClick={this.increaseQuantity} // whenever i click this icon increaseQuantity function will be called
-                      />
+                      onClick={() => onIncreaseQuantity(product)}/> 
+                       
+                      
 
                      <img alt="decrease" className="action-icons" src="https://image.flaticon.com/icons/svg/659/659892.svg"
-                     onClick={this.decreaseQuantity} // whenever i click this icon decreaseQuantity function will be called
+                     onClick={() => onDecreaseQuantity(product)} // whenever i click this icon decreaseQuantity function will be called
                       />
-                     <img alt="delete" className="action-icons" src="https://image.flaticon.com/icons/svg/1345/1345874.svg" />
+                     <img alt="delete" className="action-icons" src="https://image.flaticon.com/icons/svg/1345/1345874.svg" 
+                     onClick={() => onDeleteItem(product.id)}
+                     />
                  </div>
             </div>
         </div>

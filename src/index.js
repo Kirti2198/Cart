@@ -1,5 +1,5 @@
 
-import React , { StrictMode, useContext } from 'react';
+import React  from 'react';
 import ReactDOM from 'react-dom';
 
 import './index.css';
