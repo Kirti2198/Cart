@@ -1,7 +1,7 @@
 import React from 'react';
 
-
-class CartItem extends React.Component{
+// change it to functional component
+const CartItem =(props) => {
    
         /* binding for accesing the 'this' keyword if we have multiple event handler this.increaseQuantity=this.increaseQuantity.bind(this); 
         or we can use arrow function */ 
@@ -66,18 +66,21 @@ class CartItem extends React.Component{
                         }                            
                 });
     } */
-    render(){
-        console.log('this.props',this.props);
+    
+        // console.log('this.props',this.props);
         // console.log('render');
         // const{price, title, Qty }= this.state;
         // instead of state we can use props
-        const{price, title, Qty, id }= this.props.product;
-        const{product, onIncreaseQuantity, onDecreaseQuantity, onDeleteItem }= this.props;
+        const{price, title, Qty }= props.product;
+        const{product, 
+            onIncreaseQuantity,
+            onDecreaseQuantity,
+            onDeleteItem }= props;
         return(
         <div className="cart-item">
-            {this.props.jsx}
+            {/* {this.props.jsx} */}
             <div className="left-block">
-                <img style={styles.image}/>
+                <img style={styles.image} src={product.img}/>
             </div>
 
             <div className="right-block">
@@ -103,7 +106,7 @@ class CartItem extends React.Component{
             </div>
         </div>
         );
-    }
+    
 }
 
 // we can style our items using objects
